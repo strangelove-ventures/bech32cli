@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/bech32"
 	"github.com/spf13/cobra"
 )
 
@@ -21,12 +22,17 @@ $ %s t cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt osmo`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			address, newPrefix := args[0], args[1]
 
-			sdkAddr, err := types.AccAddressFromBech32(address)
+			_, bz, err := bech32.DecodeAndConvert(address)
 			if err != nil {
 				return fmt.Errorf("failed to decode [bech32Address]: %s - %w", address, err)
 			}
 
-			newAddr, err := types.Bech32ifyAddressBytes(newPrefix, sdkAddr)
+			err = types.VerifyAddressFormat(bz)
+			if err != nil {
+				return fmt.Errorf("failed to verify [bech32Address]: %s - %w", address, err)
+			}
+
+			newAddr, err := types.Bech32ifyAddressBytes(newPrefix, bz)
 			if err != nil {
 				return fmt.Errorf("failed to encode with [newBech32Prefix]: %s - %w", newPrefix, err)
 			}

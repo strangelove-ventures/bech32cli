@@ -22,10 +22,17 @@ type transformTestCase struct {
 func TestCmdTransform(t *testing.T) {
 	testCases := []transformTestCase{
 		{
-			name:          "happy path",
+			name:          "happy path cosmos",
 			bech32Address: "cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt",
 			newPrefix:     "juno",
 			expectedOut:   "juno1ge60jkvf2wygslexprqgshxgmzd6zqlumsy4rh",
+			expectedErr:   nil,
+		},
+		{
+			name:          "happy path juno",
+			bech32Address: "juno1ge60jkvf2wygslexprqgshxgmzd6zqlumsy4rh",
+			newPrefix:     "cosmos",
+			expectedOut:   "cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt",
 			expectedErr:   nil,
 		},
 		{
