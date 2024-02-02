@@ -2,7 +2,9 @@
 
 A simple CLI to transform bech32 addresses
 
-### Usage
+## Usage
+
+### Transform address from one bech32 prefix to another (same coin type)
 
 ``` bash
 $ bech32 transform -h
@@ -19,12 +21,29 @@ $ bech32 transform cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt osmo
 $ bech32 t cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt osmo
 ```
 
-### Example
+### Derive a validator address from either a hex address or a base64 pubkey
 
-``` bash
-$ bech32 transform cosmos1ge60jkvf2wygslexprqgshxgmzd6zqludz8wyt osmo
-osmo1ge60jkvf2wygslexprqgshxgmzd6zqlu9e57je
+```bash
+$ bech32 valcons -h
+validator consensus address transformation
+
+Usage:
+  bech32 valcons [flags]
+
+Aliases:
+  valcons, v
+
+Examples:
+$ bech32 valcons osmo --pubkey wC+QT4cw8WWOwRZhL/XZ8XusXSH7Q3kvhEnFFPagXis=
+$ bech32 v osmo --pubkey wC+QT4cw8WWOwRZhL/XZ8XusXSH7Q3kvhEnFFPagXis=
+$ bech32 v osmo --address 023DCF3F6AEA4E0098ABBA2AF23F3D65AC324851
+$ bech32 v osmo --address 023DCF3F6AEA4E0098ABBA2AF23F3D65AC324851
+
+Flags:
+      --address string   validator hex address to transform
+      --pubkey string    validator base64 pubkey to transform
 ```
+
 
 ### Build static bins
 

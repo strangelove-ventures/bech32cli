@@ -25,6 +25,7 @@ func NewRootCmd(log *zap.Logger) *cobra.Command {
 
 	rootCmd.AddCommand(
 		transformCmd(a),
+		valConsCmd(a),
 		versionCmd(a),
 	)
 
