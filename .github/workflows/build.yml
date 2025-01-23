@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -21,18 +24,25 @@ jobs:
         run: |
           make build-static
 
-      - name: Upload Binaries as Artifacts
+      - name: Upload AMD64 Binary as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: bech32-amd64
           path: build/bech32-amd64
 
+      - name: Upload ARM64 Binary as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bech32-arm46
+          path: build/bech32-arm46
+
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            build/bech32-amd64
+          files:
+            - build/bech32-amd64
+            - build/bech32-arm64
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
