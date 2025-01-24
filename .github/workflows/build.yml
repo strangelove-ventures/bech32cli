@@ -46,8 +46,8 @@ jobs:
       - name: Upload ARM64 Binary as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bech32-arm46
-          path: build/bech32-arm46
+          name: bech32-arm64
+          path: build/bech32-arm64
 
       - name: Create GitHub Release
         id: create_release
