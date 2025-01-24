@@ -26,10 +26,10 @@ build-static: build-static-amd64 build-static-arm64
 
 build-static-amd64:
 	@echo "building bech32 amd64 static binary..."
-	@GOOS=linux GOARCH=amd64 go build -mod=readonly -o build/bech32-amd64 -a -tags netgo -ldflags '$(ldflags) -extldflags "-static"' .
+	@GOOS=linux GOARCH=amd64 go build -o build/bech32-amd64 -a -tags netgo -ldflags '$(ldflags) -extldflags "-static"' .
 
 build-static-arm64:
 	@echo "building bech32 arm64 static binary..."
-	@GOOS=linux GOARCH=arm64 go build -mod=readonly -o build/bech32-arm64 -a -tags netgo -ldflags '$(ldflags) -extldflags "-static"' .
+	@GOOS=linux GOARCH=arm64 go build -o build/bech32-arm64 -a -tags netgo -ldflags '$(ldflags) -extldflags "-static"' .
 
 .PHONY: all build build-static-amd64 build-static-arm64
