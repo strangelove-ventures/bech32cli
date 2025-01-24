@@ -33,7 +33,6 @@ jobs:
         working-directory: ./
         run: |
           make build-static
-
       # - name: Create Git Tag
       #   run: |
       #     git tag v1.0.0
