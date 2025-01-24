@@ -1,5 +1,4 @@
-VERSION := "v1.0.0"
-# VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
+VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
 COMMIT  := $(shell git log -1 --format='%H')
 DIRTY := $(shell git status --porcelain | wc -l | xargs)
 
