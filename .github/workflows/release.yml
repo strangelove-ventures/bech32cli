@@ -1,0 +1,33 @@
+name: release binary
+
+on:
+  release:
+    types: [ published ]
+
+env:
+  GO_VERSION: 1.19
+
+jobs:
+  release-static-binary:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout interchaintest
+        uses: actions/checkout@v4
+
+      - name: Setup go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - run: go mod tidy && make build-static
+
+      - run: chmod +x ./build/bech32-amd64 ./build/bech32-arm64
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ github.token }}
+          files: |
+            ./build/bech32-amd64
+            ./build/bech32-arm64
